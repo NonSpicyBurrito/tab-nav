@@ -1,9 +1,9 @@
 {
 	"name": "tab-nav",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"publisher": "NonSpicyBurrito",
 	"engines": {
-		"vscode": "^1.64.0"
+		"vscode": "^1.70.0"
 	},
 	"license": "MIT",
 	"displayName": "Tab Nav",
@@ -72,12 +72,12 @@
 			{
 				"key": "tab",
 				"command": "tab-nav.next",
-				"when": "tabNav.enabled && editorTextFocus && !editorTabMovesFocus && !suggestWidgetVisible && !inlineSuggestionVisible && !suggestWidgetMultipleSuggestions && !hasOtherSuggestions && !hasSnippetCompletions && !hasNextTabstop"
+				"when": "tabNav.mode == whitelist && editorLangId in tabNav.languages && tabNav.enabled && editorTextFocus && !editorTabMovesFocus && !suggestWidgetVisible && !inlineSuggestionVisible && !suggestWidgetMultipleSuggestions && !hasOtherSuggestions && !hasSnippetCompletions && !hasNextTabstop || tabNav.mode == blacklist && editorLangId not in tabNav.languages && tabNav.enabled && editorTextFocus && !editorTabMovesFocus && !suggestWidgetVisible && !inlineSuggestionVisible && !suggestWidgetMultipleSuggestions && !hasOtherSuggestions && !hasSnippetCompletions && !hasNextTabstop"
 			},
 			{
 				"key": "shift+tab",
 				"command": "tab-nav.prev",
-				"when": "tabNav.enabled && editorTextFocus && !editorTabMovesFocus && !suggestWidgetVisible && !inlineSuggestionVisible && !suggestWidgetMultipleSuggestions && !hasOtherSuggestions && !hasSnippetCompletions && !hasPrevTabstop"
+				"when": "tabNav.mode == whitelist && editorLangId in tabNav.languages && tabNav.enabled && editorTextFocus && !editorTabMovesFocus && !suggestWidgetVisible && !inlineSuggestionVisible && !suggestWidgetMultipleSuggestions && !hasOtherSuggestions && !hasSnippetCompletions && !hasPrevTabstop || tabNav.mode == blacklist && editorLangId not in tabNav.languages && tabNav.enabled && editorTextFocus && !editorTabMovesFocus && !suggestWidgetVisible && !inlineSuggestionVisible && !suggestWidgetMultipleSuggestions && !hasOtherSuggestions && !hasSnippetCompletions && !hasPrevTabstop"
 			}
 		]
 	},

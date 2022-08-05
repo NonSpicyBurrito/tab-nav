@@ -69,33 +69,16 @@ function registerCommandToggleCurrentLanguage(
 
 function registerContextListener(context: vscode.ExtensionContext) {
     context.subscriptions.push(
-        vscode.window.onDidChangeActiveTextEditor(updateWhenClauseContext)
-    )
-    context.subscriptions.push(
-        vscode.workspace.onDidOpenTextDocument(updateWhenClauseContext)
-    )
-    context.subscriptions.push(
         vscode.workspace.onDidChangeConfiguration(updateWhenClauseContext)
     )
 }
 
 function updateWhenClauseContext() {
-    const editor = vscode.window.activeTextEditor
-    if (!editor) return
-
-    const languageId = editor.document.languageId
     const { mode, languages } = getConfigs()
 
-    let isEnabled = false
-    if (enabled) {
-        if (mode === 'whitelist') {
-            isEnabled = languages.includes(languageId)
-        } else {
-            isEnabled = !languages.includes(languageId)
-        }
-    }
-
-    vscode.commands.executeCommand('setContext', 'tabNav.enabled', isEnabled)
+    vscode.commands.executeCommand('setContext', 'tabNav.enabled', enabled)
+    vscode.commands.executeCommand('setContext', 'tabNav.mode', mode)
+    vscode.commands.executeCommand('setContext', 'tabNav.languages', languages)
 }
 
 function getConfig() {
