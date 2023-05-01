@@ -16,10 +16,9 @@ export function activate(context: vscode.ExtensionContext) {
 
 function registerCommandNext(context: vscode.ExtensionContext) {
     context.subscriptions.push(
-        vscode.commands.registerTextEditorCommand(
-            'tab-nav.next',
-            (textEditor) => next(textEditor, textEditor.selection.active)
-        )
+        vscode.commands.registerTextEditorCommand('tab-nav.next', (textEditor) =>
+            next(textEditor, textEditor.selection.active),
+        ),
     )
 }
 
@@ -34,10 +33,7 @@ function next(textEditor: vscode.TextEditor, position: vscode.Position) {
         return
     }
 
-    const character = line.text.slice(
-        position.character,
-        position.character + 1
-    )
+    const character = line.text.slice(position.character, position.character + 1)
     if (characters.indexOf(character) !== -1) {
         const active = position.translate(0, 1)
         textEditor.selections = [new vscode.Selection(active, active)]
@@ -48,10 +44,9 @@ function next(textEditor: vscode.TextEditor, position: vscode.Position) {
 
 function registerCommandPrev(context: vscode.ExtensionContext) {
     context.subscriptions.push(
-        vscode.commands.registerTextEditorCommand(
-            'tab-nav.prev',
-            (textEditor) => prev(textEditor, textEditor.selection.active)
-        )
+        vscode.commands.registerTextEditorCommand('tab-nav.prev', (textEditor) =>
+            prev(textEditor, textEditor.selection.active),
+        ),
     )
 }
 
@@ -61,19 +56,13 @@ function prev(textEditor: vscode.TextEditor, position: vscode.Position) {
             textEditor.selections = [new vscode.Selection(position, position)]
         } else {
             const line = textEditor.document.lineAt(position.line - 1)
-            prev(
-                textEditor,
-                new vscode.Position(position.line - 1, line.text.length)
-            )
+            prev(textEditor, new vscode.Position(position.line - 1, line.text.length))
         }
         return
     }
 
     const line = textEditor.document.lineAt(position.line)
-    const character = line.text.slice(
-        position.character - 1,
-        position.character
-    )
+    const character = line.text.slice(position.character - 1, position.character)
     if (characters.indexOf(character) !== -1) {
         const active = position.translate(0, -1)
         textEditor.selections = [new vscode.Selection(active, active)]
@@ -90,34 +79,29 @@ function registerCommandToggleEnabled(context: vscode.ExtensionContext) {
             updateWhenClauseContext()
 
             vscode.window.showInformationMessage(
-                `Tab Nav is now ${enabled ? 'enabled' : 'disabled'}`
+                `Tab Nav is now ${enabled ? 'enabled' : 'disabled'}`,
             )
-        })
+        }),
     )
 }
 
-function registerCommandToggleCurrentLanguage(
-    context: vscode.ExtensionContext
-) {
+function registerCommandToggleCurrentLanguage(context: vscode.ExtensionContext) {
     context.subscriptions.push(
-        vscode.commands.registerTextEditorCommand(
-            'tab-nav.toggleCurrentLanguage',
-            (editor) => {
-                const languageId = editor.document.languageId
-                const { languages } = getConfigs()
+        vscode.commands.registerTextEditorCommand('tab-nav.toggleCurrentLanguage', (editor) => {
+            const languageId = editor.document.languageId
+            const { languages } = getConfigs()
 
-                const newLanguages = languages.includes(languageId)
-                    ? languages.filter((id) => id !== languageId)
-                    : [...languages, languageId]
-                getConfig().update('languages', newLanguages, true)
+            const newLanguages = languages.includes(languageId)
+                ? languages.filter((id) => id !== languageId)
+                : [...languages, languageId]
+            getConfig().update('languages', newLanguages, true)
 
-                vscode.window.showInformationMessage(
-                    `Language "${languageId}" is now ${
-                        newLanguages.includes(languageId) ? 'added' : 'removed'
-                    }`
-                )
-            }
-        )
+            vscode.window.showInformationMessage(
+                `Language "${languageId}" is now ${
+                    newLanguages.includes(languageId) ? 'added' : 'removed'
+                }`,
+            )
+        }),
     )
 }
 
@@ -126,7 +110,7 @@ function registerContextListener(context: vscode.ExtensionContext) {
         vscode.workspace.onDidChangeConfiguration(() => {
             updateWhenClauseContext()
             updateCharacterSequences()
-        })
+        }),
     )
 }
 
