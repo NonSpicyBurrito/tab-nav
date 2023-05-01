@@ -1,6 +1,6 @@
 {
 	"name": "tab-nav",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"publisher": "NonSpicyBurrito",
 	"engines": {
 		"vscode": "^1.77.0"
