@@ -6,6 +6,7 @@ Word navigation using `Tab` key.
 
 -   Keybinding `Tab`: navigate to next.
 -   Keybinding `Shift+Tab`: navigate to previous.
+-   One at a time: a list of configurable characters to tab over one at a time.
 -   Blacklist and whitelist mode: control whether to enable or disable Tab Nav based on current language.
 -   Command "Toggle Current Language": toggle current language in languages.
 -   Command "Toggle Enabled": toggle enabled/disabled as quick escape hatch.
