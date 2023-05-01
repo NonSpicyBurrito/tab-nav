@@ -47,6 +47,12 @@
 						"type": "string"
 					},
 					"default": []
+				},
+				"tab-nav.characters": {
+					"order": 2,
+					"description": "Characters to tab over one at a time.",
+					"type": "string",
+					"default": "\"'`()[]{}"
 				}
 			}
 		},
